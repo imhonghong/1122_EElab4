@@ -309,10 +309,6 @@ void UART1_speed_control (void){
 					sprintf(sendbuf, "Speed: %d \r\nrpm: %d \r\nDirection: %s \r\n", UART_speed, UART_speed*6 , (dir ? "Clockwise" : "Counterclockwise"));
 					StrPush(sendbuf);
 					break;
-				case 'i':
-					baudrate = 9600;
-					ChangeBaudRate (baudrate);
-					break;
 				default:
 				switch(CMDstate){
 					case 0:
@@ -404,7 +400,7 @@ void ADC_speed_control (void) {
 
 void clock_tick(void){
 	static uint32_t timecount_clk = 0;
-	if(timecount - timecount_clk <5000)
+	if(timecount - timecount_clk <10000)
 		return;
 	sec++;
 	if(sec>=60){
